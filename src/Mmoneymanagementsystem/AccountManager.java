@@ -1,62 +1,115 @@
 package Mmoneymanagementsystem;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MoneyMng {
-	Mmoneys mmoneys;
+public class AccountManager {
+	ArrayList<Accounts> account = new ArrayList<Accounts>();
 	Scanner input;
-	MoneyMng(Scanner input){
+	AccountManager(Scanner input){
 		this.input = input;
 	}
 	
-	public void mytotalmoney() {
-		mmoneys = new Mmoneys();
-		System.out.print("Total Money : ");
-		mmoneys.total = input.nextInt();
-		System.out.println();
-	}
-	
-	public void incomemoney() {
-	    mmoneys = new Mmoneys();
-		System.out.print("Total Money : ");
-		mmoneys.total = input.nextInt();
-		System.out.print("Income : ");
-		mmoneys.income = input.nextInt();
-		System.out.print("Total : ");
-		System.out.print(mmoneys.total + mmoneys.income);
-		mmoneys.T1 = (mmoneys.total + mmoneys.income);
-		System.out.println();
+	public void addAccount() {
+		Accounts accounting;
+		int accnum = 0;
+		while(accnum != 1 && accnum != 2 && accnum != 3) {
+			System.out.println("1) SSA account");
+			System.out.println("2) SSB account");
+			System.out.println("3) SSC account");
+			System.out.print("Choose number between 1 - 3 : ");
+			
+			accnum = input.nextInt();
+			
+			if (accnum == 1) {
+				accounting = new SSAaccountPerson(AccountKinds.SSAaccount);
+				accounting.getInformation(input);
+				account.add(accounting);
+			}
+			
+			else if (accnum == 2) {
+				accounting = new SSBaccountPerson(AccountKinds.SSBaccount);
+				accounting.getInformation(input);
+				account.add(accounting);
+			}
+			
+			else if (accnum == 3) {
+				accounting = new SSCaccountPerson(AccountKinds.SSCaccount);
+				accounting.getInformation(input);
+				account.add(accounting);
+			}
+			
+			else {
+				System.out.println("Enter a number between 1 - 3");
+			}
+		}
 	}
 	    
-	public void spendingmoney() {
-	    mmoneys = new Mmoneys();
-		System.out.print("Total Money : ");
-		mmoneys.T1 = input.nextInt();
-		System.out.print("Spending : ");
-		mmoneys.spend = input.nextInt();
-		System.out.print("Total : ");
-		System.out.print(mmoneys.T1 - mmoneys.spend);
-		mmoneys.T2 = (mmoneys.T1 - mmoneys.spend);
-		System.out.println();
+	public void deleteAccount() {
+		System.out.print("Write Account number : ");
+		int accname = input.nextInt();
+		int index  = -1;
+		for (int i = 0; i<account.size(); i++) {
+			if (account.get(i).getAccname() == accname) { 
+				index = i;
+				break;
+			}
+		}
+		
+		if (index >= 0) {
+			account.remove(index);
+			System.out.println("Account " + accname + " is deleted");
+			System.out.println();
+		}
+		else {
+			System.out.println("Account hasn't been registered");
+			System.out.println();
+			return;
+		}
 	}
 	    
-	public void savingmoney() {
-		System.out.print("Total Money : ");
-		mmoneys.T2 = input.nextInt();
-		System.out.print("Saving Money1 : ");
-		mmoneys.saving1 = input.nextInt();
-		System.out.print("Saving Money2 : ");
-		mmoneys.saving2 = input.nextInt();
-		System.out.print("Total Saving Money : ");
-		System.out.println(mmoneys.saving1 + mmoneys.saving2);
-		System.out.print("Total : ");
-		System.out.println(mmoneys.T2 + mmoneys.saving1 + mmoneys.saving2);
-		mmoneys.T3 = (mmoneys.T2 + mmoneys.saving1 + mmoneys.saving2);
-		System.out.println();
+	public void editAccount() {
+		System.out.println("Write Account number : ");
+		int accname = input.nextInt();
+		for(int i = 0; i<account.size(); i++) {
+			Accounts acc = account.get(i);
+			if (acc.AccountNumbers() == accname) {
+				int num = -1;
+				while (num != 4) {
+					System.out.println("### Account Editing Menu ###");
+					System.out.println("1. Edit Income money");
+					System.out.println("2. Edit Spend money");
+					System.out.println("3. Edit Saving money");
+					System.out.println("4. Exit");
+					System.out.print("Select number between 1 - 4 : ");
+					num = input.nextInt();
+					if (num == 1) {
+						System.out.print("Income money : ");
+						int incomes = input.nextInt();
+						acc.SetIncome(incomes);
+					}
+					else if (num == 2) {
+						System.out.print("Spend money : ");
+						int spends = input.nextInt();
+						acc.SetSpend(spends);
+					}
+					else if (num == 3) {
+						System.out.print("Saving money : ");
+						int savings = input.nextInt();
+						acc.SetSaving(savings);
+					}
+					else {
+						continue;
+					}
+				}
+				break;
+			}
+		}
 	}
 	
-	public void reference() {
-		mmoneys.printInfo1();
+	public void viewAccount() {
+		for(int i = 0 ; i<account.size(); i++) {
+			account.get(i).PrintInformations();
+		}
 	}
-
 }

@@ -1,29 +1,97 @@
 package Mmoneymanagementsystem;
 
-public class Mmoneys {
-	int T1, T2, T3;
-	int total;
-	int income;
-	int spend;
-	int saving1;
-	int saving2;
+import java.util.Scanner;
+
+public abstract class Accounts {
+	protected AccountKinds kind = AccountKinds.SSAaccount;
 	
-	public Mmoneys() {
-	}
-	
-    public Mmoneys(int total, int income, int spend, int saving1, int saving2) {
-		this.total = total;
-		this.income = income;
-		this.spend = spend;
-		this.saving1 = saving1;
-		this.saving2 = saving2;
-	}
-    
-	public void printInfo1() {
-		System.out.println("Total money(Income) : " + T1);
-		System.out.println("Total money(Income+Spending) : " + T2);
-		System.out.println("Total money(Income+Spending+Saving) : " + T3);
-		System.out.println();
+	public AccountKinds getKind() { 
+		return kind;
 	}
 
+	public void setKind(AccountKinds kind) {
+		this.kind = kind;
+	}
+
+	public int getAccname() {
+		return accname;
+	}
+
+	public void setAccname(int accname) {
+		this.accname = accname;
+	}
+
+	public int getIncome() {
+		return income;
+	}
+
+	public void setIncome(int income) {
+		this.income = income;
+	}
+
+	public int getSpend() {
+		return spend;
+	}
+
+	public void setSpend(int spend) {
+		this.spend = spend;
+	}
+
+	public int getSaving() {
+		return saving;
+	}
+
+	public void setSaving(int saving) {
+		this.saving = saving;
+	}
+
+	protected int accname;
+	protected int income;
+	protected int spend;
+	protected int saving;
+	
+	public Accounts() {
+		
+	}
+	
+    public Accounts(int accname, int income, int spend, int saving) {
+    	this.accname = accname;
+		this.income = income;
+		this.spend = spend;
+		this.saving = saving;
+	}
+    
+	public Accounts(AccountKinds ssaaccount) {
+		
+	}
+
+	public abstract void PrintInformations();
+	
+	public int AccountNumbers() {
+		return accname;
+	}
+	
+	public void SetAccount(int accname) {
+		this.accname = accname;
+	}
+	
+	public void SetIncome(int income) {
+		this.income = income;
+	}
+	
+	public void SetSpend(int spend) {
+		this.spend = spend;
+	}
+	
+	public void SetSaving(int saving) {
+		this.saving = saving;
+	}
+
+	public void AccountInfo(Scanner input) {
+		
+	}
+
+	public void getInformation(Scanner input) {
+		
+	}
 }

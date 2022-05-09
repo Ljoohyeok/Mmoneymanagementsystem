@@ -2,7 +2,7 @@ package Mmoneymanagementsystem;
 
 import java.util.Scanner;
 
-public class SSAaccounts extends Accounts {
+public abstract class SSAaccounts extends Accounts {
 	
 	public void getInformation(Scanner input) {
 		System.out.print("Write SSA account number : ");
