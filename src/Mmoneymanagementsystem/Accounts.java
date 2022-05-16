@@ -2,7 +2,7 @@ package Mmoneymanagementsystem;
 
 import java.util.Scanner;
 
-public abstract class Accounts {
+public abstract class Accounts implements AccountInfo {
 	protected AccountKinds kind = AccountKinds.SSAaccount;
 	
 	public AccountKinds getKind() { 
@@ -92,6 +92,10 @@ public abstract class Accounts {
 	}
 
 	public void getInformation(Scanner input) {
+		
+	}
+
+	public void add(Accounts account) {
 		
 	}
 }

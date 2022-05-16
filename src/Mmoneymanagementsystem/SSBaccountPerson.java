@@ -2,7 +2,7 @@ package Mmoneymanagementsystem;
 
 import java.util.Scanner;
 
-public class SSBaccountPerson extends Accounts implements AccountInfo {
+public class SSBaccountPerson extends Accounts {
 	
 	public SSBaccountPerson(AccountKinds kind) {
 		super(kind);

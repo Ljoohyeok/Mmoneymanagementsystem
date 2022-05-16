@@ -1,6 +1,7 @@
 package Mmoneymanagementsystem;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AccountManager {
@@ -14,40 +15,57 @@ public class AccountManager {
 		Accounts accounting;
 		int accnum = 0;
 		while(accnum != 1 && accnum != 2 && accnum != 3) {
-			System.out.println("1) SSA account");
-			System.out.println("2) SSB account");
-			System.out.println("3) SSC account");
-			System.out.print("Choose number between 1 - 3 : ");
+			try {
+				menuAccount();
+				accnum = input.nextInt();
+		
+				if (accnum == 1) {
+					accounting = new SSAaccountPerson(AccountKinds.SSAaccount);
+					accounting.getInformation(input);
+					account.add(accounting);
+				}
 			
-			accnum = input.nextInt();
+				else if (accnum == 2) {
+					accounting = new SSBaccountPerson(AccountKinds.SSBaccount);
+					accounting.getInformation(input);
+					account.add(accounting);
+				}
 			
-			if (accnum == 1) {
-				accounting = new SSAaccountPerson(AccountKinds.SSAaccount);
-				accounting.getInformation(input);
-				account.add(accounting);
+				else if (accnum == 3) {
+					accounting = new SSCaccountPerson(AccountKinds.SSCaccount);
+					accounting.getInformation(input);
+					account.add(accounting);
+				}
+			
+				else {
+					System.out.print("Enter number between 1 - 3");
+				}
 			}
-			
-			else if (accnum == 2) {
-				accounting = new SSBaccountPerson(AccountKinds.SSBaccount);
-				accounting.getInformation(input);
-				account.add(accounting);
-			}
-			
-			else if (accnum == 3) {
-				accounting = new SSCaccountPerson(AccountKinds.SSCaccount);
-				accounting.getInformation(input);
-				account.add(accounting);
-			}
-			
-			else {
-				System.out.println("Enter a number between 1 - 3");
+			catch (InputMismatchException e) {
+				System.out.println("Please enter integer number");
+				if (input.hasNext()) {
+					input.next();
+				}
+				accnum = -1;
 			}
 		}
+	}
+
+	public void menuAccount() {
+		System.out.println("1) SSA account");
+		System.out.println("2) SSB account");
+		System.out.println("3) SSC account");
+		System.out.print("Choose number between 1 - 3 : ");
 	}
 	    
 	public void deleteAccount() {
 		System.out.print("Write Account number : ");
 		int accname = input.nextInt();
+		int index  = findingIndex(accname);
+		removeAccount(index, accname);
+	}
+	
+	public int findingIndex(int accname) {
 		int index  = -1;
 		for (int i = 0; i<account.size(); i++) {
 			if (account.get(i).getAccname() == accname) { 
@@ -55,16 +73,20 @@ public class AccountManager {
 				break;
 			}
 		}
-		
+		return index;
+	}
+	
+	public int removeAccount(int index, int accname) {
 		if (index >= 0) {
 			account.remove(index);
 			System.out.println("Account " + accname + " is deleted");
 			System.out.println();
+			return 0;
 		}
 		else {
 			System.out.println("Account hasn't been registered");
 			System.out.println();
-			return;
+			return -1;
 		}
 	}
 	    
@@ -76,27 +98,29 @@ public class AccountManager {
 			if (acc.AccountNumbers() == accname) {
 				int num = -1;
 				while (num != 4) {
-					System.out.println("### Account Editing Menu ###");
-					System.out.println("1. Edit Income money");
-					System.out.println("2. Edit Spend money");
-					System.out.println("3. Edit Saving money");
-					System.out.println("4. Exit");
-					System.out.print("Select number between 1 - 4 : ");
+					showingEditMenu();
 					num = input.nextInt();
+					switch(num) {
+						case 1 :
+							incomeAccount(acc, input);
+							break;
+						case 2 :
+							spendAccount(acc, input);
+							break;
+						case 3 :
+							savingAccount(acc, input);
+							break;
+						default :
+							continue;
+					}
 					if (num == 1) {
-						System.out.print("Income money : ");
-						int incomes = input.nextInt();
-						acc.SetIncome(incomes);
+						
 					}
 					else if (num == 2) {
-						System.out.print("Spend money : ");
-						int spends = input.nextInt();
-						acc.SetSpend(spends);
+						
 					}
 					else if (num == 3) {
-						System.out.print("Saving money : ");
-						int savings = input.nextInt();
-						acc.SetSaving(savings);
+						
 					}
 					else {
 						continue;
@@ -111,5 +135,32 @@ public class AccountManager {
 		for(int i = 0 ; i<account.size(); i++) {
 			account.get(i).PrintInformations();
 		}
+	}
+	
+	public void incomeAccount(Accounts account, Scanner input) {
+		System.out.print("Income money : ");
+		int incomes = input.nextInt();
+		account.SetIncome(incomes);
+	}
+	
+	public void spendAccount(Accounts account, Scanner input) {
+		System.out.print("Spend money : ");
+		int spends = input.nextInt();
+		account.SetSpend(spends);
+	}
+	
+	public void savingAccount(Accounts account, Scanner input) {
+		System.out.print("Saving money : ");
+		int savings = input.nextInt();
+		account.SetSaving(savings);
+	}
+	
+	public void showingEditMenu() {
+		System.out.println("### Account Editing Menu ###");
+		System.out.println("1. Edit Income money");
+		System.out.println("2. Edit Spend money");
+		System.out.println("3. Edit Saving money");
+		System.out.println("4. Exit");
+		System.out.print("Select number between 1 - 4 : ");
 	}
 }
