@@ -1,8 +1,9 @@
 package Mmoneymanagementsystem;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public abstract class Accounts implements AccountInfo {
+public abstract class Accounts implements AccountInfo, Serializable {
 	protected AccountKinds kind = AccountKinds.SSAaccount;
 	
 	public AccountKinds getKind() { 

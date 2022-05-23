@@ -1,8 +1,9 @@
 package Mmoneymanagementsystem;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class SSBaccountPerson extends Accounts {
+public class SSBaccountPerson extends Accounts implements Serializable {
 	
 	public SSBaccountPerson(AccountKinds kind) {
 		super(kind);

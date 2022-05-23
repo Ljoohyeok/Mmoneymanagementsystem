@@ -1,12 +1,18 @@
 package Mmoneymanagementsystem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class AccountManager {
+public class AccountManager implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8144201475895774259L;
+	
 	ArrayList<Accounts> account = new ArrayList<Accounts>();
-	Scanner input;
+	transient Scanner input;
 	AccountManager(Scanner input){
 		this.input = input;
 	}
@@ -101,17 +107,17 @@ public class AccountManager {
 					showingEditMenu();
 					num = input.nextInt();
 					switch(num) {
-						case 1 :
-							incomeAccount(acc, input);
-							break;
-						case 2 :
-							spendAccount(acc, input);
-							break;
-						case 3 :
-							savingAccount(acc, input);
-							break;
-						default :
-							continue;
+					case 1 :
+						incomeAccount(acc, input);
+						break;
+					case 2 :
+						spendAccount(acc, input);
+						break;
+					case 3 :
+						savingAccount(acc, input);
+						break;
+					default :
+						continue;
 					}
 					if (num == 1) {
 						

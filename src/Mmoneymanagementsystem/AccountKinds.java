@@ -1,6 +1,6 @@
 package Mmoneymanagementsystem;
 
-public enum AccountKinds {
+public enum AccountKinds {   
 	SSAaccount,
 	SSBaccount,
 	SSCaccount
