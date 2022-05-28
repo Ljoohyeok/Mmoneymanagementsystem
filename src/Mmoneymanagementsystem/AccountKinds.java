@@ -1,4 +1,4 @@
-package Mmoneymanagementsystem;  
+package Mmoneymanagementsystem;   
 
 public enum AccountKinds {   
 	SSAaccount,

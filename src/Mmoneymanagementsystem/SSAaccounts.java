@@ -1,4 +1,4 @@
-package Mmoneymanagementsystem;  
+package Mmoneymanagementsystem;   
 
 import java.util.Scanner;  
 

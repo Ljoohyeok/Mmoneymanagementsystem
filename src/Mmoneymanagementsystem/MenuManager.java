@@ -1,4 +1,4 @@
-package Mmoneymanagementsystem;   
+package Mmoneymanagementsystem;    
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
