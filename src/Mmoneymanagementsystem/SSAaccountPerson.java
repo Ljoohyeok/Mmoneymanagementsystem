@@ -1,6 +1,6 @@
 package Mmoneymanagementsystem;  
 
-import java.io.Serializable; 
+import java.io.Serializable;  
 import java.util.Scanner;
 
 public class SSAaccountPerson extends Accounts implements Serializable {
