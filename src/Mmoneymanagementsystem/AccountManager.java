@@ -6,9 +6,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AccountManager implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8144201475895774259L;
 	
 	ArrayList<Accounts> account = new ArrayList<Accounts>();
@@ -17,7 +14,7 @@ public class AccountManager implements Serializable {
 		this.input = input;
 	}
 	
-	public void addAccount() {
+	public void addAccount(Scanner input) {
 		Accounts accounting;
 		int accnum = 0;
 		while(accnum != 1 && accnum != 2 && accnum != 3) {
@@ -27,6 +24,7 @@ public class AccountManager implements Serializable {
 		
 				if (accnum == 1) {
 					accounting = new SSAaccountPerson(AccountKinds.SSAaccount);
+					
 					accounting.getInformation(input);
 					account.add(accounting);
 				}
@@ -47,6 +45,10 @@ public class AccountManager implements Serializable {
 					System.out.print("Enter number between 1 - 3");
 				}
 			}
+			catch (NullPointerException e) {
+				input = new Scanner(System.in);
+				continue;
+			}
 			catch (InputMismatchException e) {
 				System.out.println("Please enter integer number");
 				if (input.hasNext()) {
@@ -54,6 +56,7 @@ public class AccountManager implements Serializable {
 				}
 				accnum = -1;
 			}
+			
 		}
 	}
 
@@ -64,7 +67,7 @@ public class AccountManager implements Serializable {
 		System.out.print("Choose number between 1 - 3 : ");
 	}
 	    
-	public void deleteAccount() {
+	public void deleteAccount(Scanner input) {
 		System.out.print("Write Account number : ");
 		int accname = input.nextInt();
 		int index  = findingIndex(accname);
@@ -96,7 +99,7 @@ public class AccountManager implements Serializable {
 		}
 	}
 	    
-	public void editAccount() {
+	public void editAccount(Scanner input) {
 		System.out.println("Write Account number : ");
 		int accname = input.nextInt();
 		for(int i = 0; i<account.size(); i++) {
@@ -137,7 +140,15 @@ public class AccountManager implements Serializable {
 		}
 	}
 	
-	public void viewAccount() {
+	public int size() {
+		return account.size();
+	}
+	
+	public Accounts get(int index) {
+		return account.get(index);
+	}
+	
+	public void viewAccount(Scanner input) {
 		for(int i = 0 ; i<account.size(); i++) {
 			account.get(i).PrintInformations();
 		}

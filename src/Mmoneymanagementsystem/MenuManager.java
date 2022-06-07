@@ -8,23 +8,26 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import gui.WindowFrame;
 import log.EventLogger;
 
 public class MenuManager {
 	static EventLogger logger = new EventLogger("log.txt");
+	static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
         AccountManager moneyMng = getObject("moneyMng.ser");
         if (moneyMng == null) {
         	moneyMng = new AccountManager(input);
         }
         
-        selectingMenu(input, moneyMng);
+        WindowFrame frame = new WindowFrame(moneyMng);
+        selectingMenu(moneyMng);
         putObject(moneyMng, "moneyMng.ser");
     }
     
-    public static void selectingMenu(Scanner input, AccountManager moneyMng) {
+    public static void selectingMenu(AccountManager moneyMng) {
     	int number = 0;
 		while (number != 5) {
 			try {
@@ -32,19 +35,19 @@ public class MenuManager {
 				number = input.nextInt();
 				switch(number) {
         		case 1 :
-        			moneyMng.addAccount();
+        			moneyMng.addAccount(input);
         			logger.log("add account");
         			break;
         		case 2 :
-        			moneyMng.deleteAccount();
+        			moneyMng.deleteAccount(input);
         			logger.log("delete account");
         			break;
         		case 3 :
-        			moneyMng.editAccount();
+        			moneyMng.editAccount(input);
         			logger.log("edit account");
         			break;
         		case 4 :
-        			moneyMng.viewAccount();
+        			moneyMng.viewAccount(input);
         			logger.log("view account");
         			break;
         		default :
@@ -67,6 +70,9 @@ public class MenuManager {
         		
         		}
 			}
+			catch (NullPointerException e) {
+				number = 0;
+			}
 			catch(InputMismatchException e) {
 				System.out.println("Please enter integer number");
 				if (input.hasNext()) {
@@ -74,6 +80,7 @@ public class MenuManager {
 				}
 				number = -1;
 			}
+			
         }
     }
     

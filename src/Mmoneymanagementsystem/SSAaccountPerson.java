@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 public class SSAaccountPerson extends Accounts implements Serializable {
-	
+	private static final long serialVersionUID = 8043004194754003713L;
+
 	public SSAaccountPerson(AccountKinds kind) {
 		super(kind);
 	}

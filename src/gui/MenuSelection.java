@@ -6,28 +6,37 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MenuSelection extends JFrame {
+import listener.ButtonAddListener;
+import listener.ButtonViewListener;
 
-   public MenuSelection() {
-      this.setSize(300, 300);
-      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+public class MenuSelection extends JPanel {
+	
+	WindowFrame frame;
+
+    public MenuSelection(WindowFrame frame) {
+    	this.frame = frame;
+    	
+	    this.setLayout(new BorderLayout());
       
-      JPanel panel1 = new JPanel();
-      JPanel panel2 = new JPanel();
-      JLabel label = new JLabel("Menu Selection");
-      JButton button1 = new JButton("SSA Account");
-      JButton button2 = new JButton("SSB Account");
-      JButton button3 = new JButton("SSC Account");
-      JButton button4 = new JButton("Exit");
+        JPanel panel1 = new JPanel();
+        JPanel panel2 = new JPanel();
+        JLabel label = new JLabel("Menu Selection");
+        JButton button1 = new JButton("Add Account");
+        JButton button2 = new JButton("Delete Account");
+        JButton button3 = new JButton("View Account");
+        JButton button4 = new JButton("Exit");
+        
+        button1.addActionListener(new ButtonAddListener(frame));
+        button2.addActionListener(new ButtonViewListener(frame));
+        button3.addActionListener(new ButtonViewListener(frame));
+        
+        panel1.add(label);
+        panel2.add(button1);
+        panel2.add(button2);
+        panel2.add(button3);
+        panel2.add(button4);
       
-      panel1.add(label);
-      panel2.add(button1);
-      panel2.add(button2);
-      panel2.add(button3);
-      panel2.add(button4);
-      
-      this.add(panel1, BorderLayout.NORTH);
-      this.add(panel2, BorderLayout.CENTER);
-      this.setVisible(true);
-   }
+        this.add(panel1, BorderLayout.NORTH);
+        this.add(panel2, BorderLayout.CENTER);
+    }
 }
