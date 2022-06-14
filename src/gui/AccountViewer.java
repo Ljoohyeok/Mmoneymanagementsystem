@@ -2,6 +2,7 @@ package gui;
 
 import java.util.Vector;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -10,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Mmoneymanagementsystem.AccountManager;
 import Mmoneymanagementsystem.Accounts;
+import buttons.ButtonCancel;
 
 public class AccountViewer extends JPanel {
 	
@@ -39,8 +41,10 @@ public class AccountViewer extends JPanel {
       
         JTable table = new JTable(model);
         JScrollPane sp = new JScrollPane(table);
-      
+        JButton cancel = new JButton("cancel");
+        cancel.addMouseListener(new ButtonCancel(frame));
         this.add(sp);
+        this.add(cancel);
         frame.setVisible(true);
     }
 }

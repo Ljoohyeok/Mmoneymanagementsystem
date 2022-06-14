@@ -35,7 +35,7 @@ public class MenuManager {
 				number = input.nextInt();
 				switch(number) {
         		case 1 :
-        			moneyMng.addAccount(input);
+        			//moneyMng.addAccount(input);
         			logger.log("add account");
         			break;
         		case 2 :

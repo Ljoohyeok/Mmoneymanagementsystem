@@ -6,14 +6,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Mmoneymanagementsystem.AccountManager;
+import buttons.ButtonExit;
+import buttons.ButtonGoAdd;
+import buttons.ButtonGoDelete;
+import buttons.ButtonGoViewer;
 import listener.ButtonAddListener;
 import listener.ButtonViewListener;
 
 public class MenuSelection extends JPanel {
 	
 	WindowFrame frame;
-
-    public MenuSelection(WindowFrame frame) {
+	AccountManager am;
+    public MenuSelection(WindowFrame frame, AccountManager am) {
     	this.frame = frame;
     	
 	    this.setLayout(new BorderLayout());
@@ -26,10 +31,10 @@ public class MenuSelection extends JPanel {
         JButton button3 = new JButton("View Account");
         JButton button4 = new JButton("Exit");
         
-        button1.addActionListener(new ButtonAddListener(frame));
-        button2.addActionListener(new ButtonViewListener(frame));
-        button3.addActionListener(new ButtonViewListener(frame));
-        
+        button1.addMouseListener(new ButtonGoAdd(frame));
+        button2.addMouseListener(new ButtonGoDelete(frame));
+        button3.addMouseListener(new ButtonGoViewer(frame));
+        button4.addMouseListener(new ButtonExit(frame, am));
         panel1.add(label);
         panel2.add(button1);
         panel2.add(button2);

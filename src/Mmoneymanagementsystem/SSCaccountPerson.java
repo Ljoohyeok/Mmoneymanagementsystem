@@ -1,4 +1,4 @@
-package Mmoneymanagementsystem;  
+package Mmoneymanagementsystem;   
 
 import java.io.Serializable;   
 import java.util.Scanner;

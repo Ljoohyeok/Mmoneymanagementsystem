@@ -9,55 +9,18 @@ public class AccountManager implements Serializable {
 	private static final long serialVersionUID = -8144201475895774259L;
 	
 	ArrayList<Accounts> account = new ArrayList<Accounts>();
+	
+	public ArrayList<Accounts> getList() {
+		return account;
+	}
+	
 	transient Scanner input;
 	AccountManager(Scanner input){
 		this.input = input;
 	}
 	
-	public void addAccount(Scanner input) {
-		Accounts accounting;
-		int accnum = 0;
-		while(accnum != 1 && accnum != 2 && accnum != 3) {
-			try {
-				menuAccount();
-				accnum = input.nextInt();
-		
-				if (accnum == 1) {
-					accounting = new SSAaccountPerson(AccountKinds.SSAaccount);
-					
-					accounting.getInformation(input);
-					account.add(accounting);
-				}
-			
-				else if (accnum == 2) {
-					accounting = new SSBaccountPerson(AccountKinds.SSBaccount);
-					accounting.getInformation(input);
-					account.add(accounting);
-				}
-			
-				else if (accnum == 3) {
-					accounting = new SSCaccountPerson(AccountKinds.SSCaccount);
-					accounting.getInformation(input);
-					account.add(accounting);
-				}
-			
-				else {
-					System.out.print("Enter number between 1 - 3");
-				}
-			}
-			catch (NullPointerException e) {
-				input = new Scanner(System.in);
-				continue;
-			}
-			catch (InputMismatchException e) {
-				System.out.println("Please enter integer number");
-				if (input.hasNext()) {
-					input.next();
-				}
-				accnum = -1;
-			}
-			
-		}
+	public void addAccount(Accounts accounting) {
+		account.add(accounting);
 	}
 
 	public void menuAccount() {

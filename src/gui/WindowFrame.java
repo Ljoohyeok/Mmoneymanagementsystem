@@ -10,11 +10,13 @@ public class WindowFrame extends JFrame {
 	MenuSelection menuselection;
     AccountAdder accountadder;
     AccountViewer accountviewer;
+    AccountDeleter accountdeleter;
     AccountManager moneyMng;
 	
 	public WindowFrame(AccountManager moneyMng) {
-		this.menuselection = new MenuSelection(this);
-	    this.accountadder = new AccountAdder(this);
+		this.menuselection = new MenuSelection(this, moneyMng);
+	    this.accountadder = new AccountAdder(this, moneyMng);
+	    this.accountdeleter = new AccountDeleter(this, moneyMng);
 	    this.accountviewer = new AccountViewer(this, moneyMng);
 		this.moneyMng = moneyMng;
 	    
@@ -50,10 +52,19 @@ public class WindowFrame extends JFrame {
 	}
 
 	public AccountViewer getAccountviewer() {
-		return accountviewer;
+		this.setSize(500,550);
+		return new AccountViewer(this, moneyMng);
 	}
 
 	public void setAccountviewer(AccountViewer accountviewer) {
 		this.accountviewer = accountviewer;
+	}
+	
+	public AccountDeleter getAccountdeleter() {
+		return accountdeleter;
+	}
+	
+	public void setAccountdeleter(AccountDeleter accountdeleter) {
+		this.accountdeleter = accountdeleter;
 	}
 }
